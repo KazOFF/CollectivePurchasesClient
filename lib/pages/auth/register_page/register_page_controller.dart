@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:collective_purchases_client/services/api_service-dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterPageController extends GetxController {
+  final apiService = Get.find<ApiService>();
   final emailEditingController = TextEditingController();
   final passwordEditingController = TextEditingController();
   final passwordSecondEditingController = TextEditingController();
@@ -44,8 +46,22 @@ class RegisterPageController extends GetxController {
     Get.offNamed("/auth/login");
   }
 
-  registerButtonPressed(){
-
+  registerButtonPressed() async {
+    // try {
+    //   final response = await apiService.register(
+    //       email: emailEditingController.text.trim(),
+    //       password: passwordEditingController.text.trim());
+    //
+    //   apiService.authToken = response.token;
+    //   Get.offAllNamed("/dashboard");
+    // }on ApiException catch(ex){
+    //   Get.snackbar(
+    //     "Ошибка",
+    //     ex.message!,
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.red,
+    //   );
+    // }
   }
 
 }

@@ -1,7 +1,10 @@
+import 'package:collective_purchases_client/services/api_service-dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginPageController extends GetxController {
+  final apiService = Get.find<ApiService>();
   final emailEditingController = TextEditingController();
   final passwordEditingController = TextEditingController();
   var isEmailValid = true.obs;
@@ -30,7 +33,20 @@ class LoginPageController extends GetxController {
     isButtonEnabled.value = isEmailValid.value && isPasswordValid.value;
   }
 
-  loginButtonPressed(){
+  loginButtonPressed() async {
+      if(await apiService.login(
+          email: emailEditingController.text.trim(),
+          password: passwordEditingController.text.trim())) {
+        Get.offAllNamed("/dashboard");
+      }
+    // }on ApiException catch(ex){
+    //   Get.snackbar(
+    //     "Ошибка",
+    //     ex.message!,
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.red,
+    //   );
+    // }
 
   }
 
